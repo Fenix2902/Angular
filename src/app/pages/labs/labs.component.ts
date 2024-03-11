@@ -1,0 +1,37 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common'
+
+@Component({
+  selector: 'app-labs',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './labs.component.html',
+  styleUrl: './labs.component.css'
+})
+export class LabsComponent {
+  welcome = 'Bienvenidos a mi primera aplicaciòn con angular';
+  tasks = [
+    'instalar el angular CLI',
+    'Crear Proyecto',
+    'Crear componentes',
+  ];
+  name = 'Alexander'
+  age = 36;
+  disable = true
+  img = 'https://w3schools.com/howto/img_avatar.png'
+  persona = {
+    name: 'alex',
+    age: 36,
+    avatar: 'https://w3schools.com/howto/img_avatar.png'
+  }
+  //renderizar se usa {{}}
+  //Para  acceder al atributo de un objeto  en ts debemos usar []
+  // metodo de la clase se usa ()
+  clickHandler() {
+    alert('hola')
+  }
+
+  changeHandler(event: Event) {
+console.log(event);
+  }
+}
