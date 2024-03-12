@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common'
 
 @Component({
@@ -15,7 +15,7 @@ export class LabsComponent {
     'Crear Proyecto',
     'Crear componentes',
   ];
-  name = 'Alexander'
+  name = signal("Alexander")
   age = 36;
   disable = true
   img = 'https://w3schools.com/howto/img_avatar.png'
@@ -32,6 +32,13 @@ export class LabsComponent {
   }
 
   changeHandler(event: Event) {
-console.log(event);
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.name.set(newValue);
+  }
+
+  keydownHandler(event:KeyboardEvent){
+    const input = event.target as HTMLInputElement;
+    console.log(input.value)
   }
 }
