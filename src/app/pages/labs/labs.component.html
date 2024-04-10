@@ -9,37 +9,41 @@
   <hr />
   <h2>{{ "hola".repeat(4) }}</h2>
   <p>la suma es 3 + 3 es {{ 3 + 3 }}</p>
-  <p>Hola soy {{ name() }} y mi edad es {{ persona.age }} años.</p>
+  <p>Hola soy {{ name() }} y mi edad es {{ persona().age }} años.</p>
   <hr />
-  <img [src]="persona.avatar" alt="perfil" />
-  <input type="number" [value]="persona.age" />
+  <img [src]="persona().avatar" alt="perfil" />
+  <input type="number" [value]="persona().age" />
   <button [disabled]="disable">submit</button>
   <hr />
   <button (click)="clickHandler()">click me</button>
   <button (dblclick)="clickHandler()">Doble Click</button>
   <p>(change)</p>
-  <input type="number" [value]="persona.age" (change)="changeHandler($event)" />
+  <input type="number" [value]="persona().age" (change)="changeHandler($event)" />
+  <p>(change)</p>
+  <input type="text" [value]="persona().name" (change)="changeHandler($event)">
   <p>(keydown)</p>
   <!-- oprimiendo tecla -->
-  <input
-    type="text"
-    [value]="persona.name"
-    (keydown)="keydownHandler($event)"
-  />
+  <input type="text" [value]="persona().name" (keydown)="keydownHandler($event)" />
   <p>(keydown shift)</p>
-  <input
-    type="text"
-    [value]="persona.name"
-    (keydown.shift.t)="clickHandler()"
-  />
+  <input type="text" [value]="persona().name" (keydown.shift.t)="clickHandler()" />
   <hr />
-  <p>total:{{ tasks().length }}</p>
+  <h1>Signals</h1>
+  <input type="text" [value]="name()" (change)="changeHandler($event)" />
+  <p>name: {{ name() }}</p>
+
   <ul>
+    <p>total:{{ tasks().length }}</p>
     <li *ngFor="let task of tasks(); index as i">
       {{ i }} {{ task }}
     </li>
   </ul>
-  <h1>Signals</h1>
-  <input type="text" [value]="name()" (change)="changeHandler($event)" />
-  <p>name: {{ name() }}</p>
+
+  <div *ngIf="1 !== 1">
+    my contend
+  </div>
+  <div *ngIf="name() === 'nicolas'">
+    Soy nicolas..</div>
+  <div *ngIf="persona().name === 'nicolas' && persona().age > 18">
+    soy nicolas y soy mayor de 18
+  </div>
 </div>

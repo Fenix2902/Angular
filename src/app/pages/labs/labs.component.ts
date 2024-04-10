@@ -16,15 +16,16 @@ export class LabsComponent {
     'Crear componentes',
     'Crear Servicio',
   ]);
-  name = signal("Alexander")
-  age = 36;
+  name = signal('Nicolas')
+  age = 18;
   disable = true
   img = 'https://w3schools.com/howto/img_avatar.png'
-  persona = {
-    name: 'alex',
-    age: 36,
+
+  persona = signal({
+    name: 'nicolas',
+    age: 19,
     avatar: 'https://w3schools.com/howto/img_avatar.png'
-  }
+  })
   //renderizar se usa {{}}
   //Para  acceder al atributo de un objeto  en ts debemos usar []
   // metodo de la clase se usa ()
