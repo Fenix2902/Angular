@@ -16,14 +16,14 @@ export class LabsComponent {
     'Crear componentes',
     'Crear Servicio',
   ]);
-  name = signal('Nicolas')
+  name = signal('nicolas')
   age = 18;
   disable = true
   img = 'https://w3schools.com/howto/img_avatar.png'
 
   persona = signal({
-    name: 'nicolas',
-    age: 19,
+    name: 'jorge',
+    age: 17,
     avatar: 'https://w3schools.com/howto/img_avatar.png'
   })
   //renderizar se usa {{}}
@@ -39,8 +39,16 @@ export class LabsComponent {
     this.name.set(newValue);
   }
 
-  keydownHandler(event:KeyboardEvent){
+  keydownHandler(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
     console.log(input.value)
+  }
+
+  changeAge(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const newValue = input.value;
+    this.persona.update(newState =>{
+      return {...newState ,age : parseInt(newValue)}
+    });
   }
 }

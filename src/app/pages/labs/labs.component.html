@@ -43,7 +43,17 @@
   </div>
   <div *ngIf="name() === 'nicolas'">
     Soy nicolas..</div>
-  <div *ngIf="persona().name === 'nicolas' && persona().age > 18">
+  <input type="number" [value]="persona().age" (change)="changeAge($event)" />
+  <div *ngIf="persona().name === 'nicolas' && persona().age > 18, else menorEdad">
     soy nicolas y soy mayor de 18
+  </div>
+  <ng-template #menorEdad>
+    soy menor de edad
+  </ng-template>
+  <hr>
+  <div [ngSwitch]="persona().name">
+    <p *ngSwitchCase="'nicolas'">soy nicolas...</p>
+    <p *ngSwitchCase="'julian'">soy julian</p>
+    <p *ngSwitchDefault>no conozco a este tipo de persona</p>
   </div>
 </div>
