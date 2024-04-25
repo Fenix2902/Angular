@@ -7,7 +7,7 @@
     </li>
   </ul>
   <hr />
-  <h2>{{ "hola".repeat(4) }}</h2>
+  <h2>{{ "hola ".repeat(5) }}</h2>
   <p>la suma es 3 + 3 es {{ 3 + 3 }}</p>
   <p>Hola soy {{ name() }} y mi edad es {{ persona().age }} años.</p>
   <hr />
@@ -18,14 +18,30 @@
   <button (click)="clickHandler()">click me</button>
   <button (dblclick)="clickHandler()">Doble Click</button>
   <p>(change)</p>
-  <input type="number" [value]="persona().age" (change)="changeHandler($event)" />
+  <input
+    type="number"
+    [value]="persona().age"
+    (change)="changeHandler($event)"
+  />
   <p>(change)</p>
-  <input type="text" [value]="persona().name" (change)="changeHandler($event)">
+  <input
+    type="text"
+    [value]="persona().name"
+    (change)="changeHandler($event)"
+  />
   <p>(keydown)</p>
   <!-- oprimiendo tecla -->
-  <input type="text" [value]="persona().name" (keydown)="keydownHandler($event)" />
+  <input
+    type="text"
+    [value]="persona().name"
+    (keydown)="keydownHandler($event)"
+  />
   <p>(keydown shift)</p>
-  <input type="text" [value]="persona().name" (keydown.shift.t)="clickHandler()" />
+  <input
+    type="text"
+    [value]="persona().name"
+    (keydown.shift.t)="clickHandler()"
+  />
   <hr />
   <h1>Signals</h1>
   <input type="text" [value]="name()" (change)="changeHandler($event)" />
@@ -33,27 +49,30 @@
 
   <ul>
     <p>total:{{ tasks().length }}</p>
-    <li *ngFor="let task of tasks(); index as i">
-      {{ i }} {{ task }}
-    </li>
+    <li *ngFor="let task of tasks(); index as i">{{ i }} {{ task }}</li>
   </ul>
 
-  <div *ngIf="1 !== 1">
-    my contend
-  </div>
-  <div *ngIf="name() === 'nicolas'">
-    Soy nicolas..</div>
+  <div *ngIf="1 !== 1">my contend</div>
+  <div *ngIf="name() === 'nicolas'">Soy nicolas..</div>
   <input type="number" [value]="persona().age" (change)="changeAge($event)" />
-  <div *ngIf="persona().name === 'nicolas' && persona().age > 18, else menorEdad">
+  <div
+    *ngIf="persona().name === 'nicolas' && persona().age > 18; else menorEdad"
+  >
     soy nicolas y soy mayor de 18
   </div>
-  <ng-template #menorEdad>
-    soy menor de edad
-  </ng-template>
-  <hr>
+  <ng-template #menorEdad> soy menor de edad </ng-template>
+  <hr />
   <div [ngSwitch]="persona().name">
     <p *ngSwitchCase="'nicolas'">soy nicolas...</p>
     <p *ngSwitchCase="'julian'">soy julian</p>
     <p *ngSwitchDefault>no conozco a este tipo de persona</p>
   </div>
+  <hr>
+  <input type="color" [formControl] = colorCtrl>
+  <p>color:{{colorCtrl.value}}</p>
+  <svg>
+    <g>
+      <rect x="0" y ="0" height ="100" width="100" [attr.fill] ="colorCtrl.value"></rect><!--para poder modificar un atributo del svg se debe hacer por medio del attr-->
+    </g>
+  </svg>
 </div>
