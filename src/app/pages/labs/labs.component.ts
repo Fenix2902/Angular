@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormControl, ReactiveFormsModule } from '@angular/forms'; // se utiliza para inputs
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms'; // se utiliza para inputs
 import { __values } from 'tslib';
 
 @Component({
@@ -32,12 +32,19 @@ export class LabsComponent {
   //Formulario reactivos
 
   colorCtrl = new FormControl();
+  widthCtrl = new FormControl(50, {
+    nonNullable: true,
+  });
+  nameCtrl = new FormControl(50, {
+    nonNullable: true,
+    validators: [Validators.required, Validators.minLength(3)]
+  });
 
-  constructor(){
-    this.colorCtrl.valueChanges.subscribe(value =>{
+  constructor() {
+    this.colorCtrl.valueChanges.subscribe((value) => {
       console.log(`Nuevo valor ${value}`);
-    })
-  }//validacion en forma reactiva desde la lógica.
+    });
+  } //validacion en forma reactiva desde la lógica.
 
   //renderizar se usa {{}}
   //Para  acceder al atributo de un objeto  en ts debemos usar []
