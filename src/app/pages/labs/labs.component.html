@@ -2,9 +2,11 @@
   <h1>Hola este es mi primer proyecto en angular</h1>
   <h2>{{ welcome }}</h2>
   <ul>
-    <li *ngFor="let task of tasks()">
-      {{ task }}
-    </li>
+    @for (task of tasks(); track task) {
+      <li>
+        {{ task }}
+      </li>
+    }
   </ul>
   <hr />
   <h2>{{ "hola ".repeat(5) }}</h2>
@@ -22,26 +24,26 @@
     type="number"
     [value]="persona().age"
     (change)="changeHandler($event)"
-  />
+    />
   <p>(change)</p>
   <input
     type="text"
     [value]="persona().name"
     (change)="changeHandler($event)"
-  />
+    />
   <p>(keydown)</p>
   <!-- oprimiendo tecla -->
   <input
     type="text"
     [value]="persona().name"
     (keydown)="keydownHandler($event)"
-  />
+    />
   <p>(keydown shift)</p>
   <input
     type="text"
     [value]="persona().name"
     (keydown.shift.t)="clickHandler()"
-  />
+    />
   <hr />
   <h1>Signals</h1>
   <input type="text" [value]="name()" (change)="changeHandler($event)" />
@@ -49,42 +51,108 @@
 
   <ul>
     <p>total:{{ tasks().length }}</p>
-    <li *ngFor="let task of tasks(); index as i">{{ i }} {{ task }}</li>
+    @for (task of tasks(); track task; let i = $index) {
+      <li>{{ i }} {{ task }}</li>
+    }
   </ul>
 
-  <div *ngIf="1 !== 1">my contend</div>
-  <div *ngIf="name() === 'nicolas'">Soy nicolas..</div>
+  @if (1 !== 1) {
+    <div>my contend</div>
+  }
+  @if (name() === 'nicolas') {
+    <div>Soy nicolas..</div>
+  }
+  @if (name() === 'nicolas') {
+    <div> Soy Nicolass</div>
+  }
   <input type="number" [value]="persona().age" (change)="changeAge($event)" />
-  <div
-    *ngIf="persona().name === 'nicolas' && persona().age > 18; else menorEdad"
-  >
-    soy nicolas y soy mayor de 18
+  @if (persona().name === 'nicolas' && persona().age > 18) {
+    <div
+      >
+      soy nicolas y soy mayor de 18
+    </div>
+  } @else {
+    soy menor de edad
+  }
+  <h2>If else new</h2>
+  @if (persona().name === 'nicolas' && persona().age > 18) {
+    <div>soy Nicolass y soy mayor de 18</div>
+    }@else{
+    <div>Soy Nicolass y soy menor de 18</div>
+  }
+  <hr/>
+  <div>
+    @switch (persona().name) {
+      @case ('nicolas') {
+        <p>soy nicolas...</p>
+      }
+      @case ('julian') {
+        <p>soy julian</p>
+      }
+      @default {
+        <p>no conozco a este tipo de persona</p>
+      }
+    }
   </div>
-  <ng-template #menorEdad> soy menor de edad </ng-template>
-  <hr />
-  <div [ngSwitch]="persona().name">
-    <p *ngSwitchCase="'nicolas'">soy nicolas...</p>
-    <p *ngSwitchCase="'julian'">soy julian</p>
-    <p *ngSwitchDefault>no conozco a este tipo de persona</p>
-  </div>
   <hr>
-  <input type="color" [formControl] = colorCtrl>
-  <p>color:{{colorCtrl.value}}</p>
-  <svg>
-    <g>
-      <rect x="0" y ="0" height ="100" width="100" [attr.fill] ="colorCtrl.value"></rect><!--para poder modificar un atributo del svg se debe hacer por medio del attr-->
-    </g>
-  </svg>
-  <hr>
-  <input type="text" [formControl] = "widthCtrl">
-  <span class="box" [style.width.px]="widthCtrl.value"></span>
-  <hr>
-  <p>
-    <input type="text" [formControl] = "nameCtrl"><br>
-    <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre Invalido</span>
-  </p>
-<p>
-  <input type="text">
-</p>
-
-</div>
+    <input type="color" [formControl] = colorCtrl>
+    <p>color:{{colorCtrl.value}}</p>
+    <svg>
+      <g>
+        <rect x="0" y ="0" height ="100" width="100" [attr.fill] ="colorCtrl.value"></rect><!--para poder modificar un atributo del svg se debe hacer por medio del attr-->
+      </g>
+    </svg>
+    <hr>
+      <input type="text" [formControl] = "widthCtrl">
+      <span class="box" [style.width.px]="widthCtrl.value"></span>
+      <hr>
+        <p>
+          <input type="text" [formControl] = "nameCtrl"><br>
+          <span class="message-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre Invalido</span>
+        </p>
+        <p>
+          <input type="text">
+        </p>
+        <h2>New Form</h2>
+        <ul>
+          <p>total:{{ tasks().length }}</p>
+          @for (task of tasks(); track task; let i = $index) {
+            <li>{{ i }} {{ task }}</li>
+          }
+        </ul>
+        <ul>
+          @for (task of tasks(); track task; let i = $index) {
+            <li>{{i}} {{task}}</li>
+            }@empty {
+            <li><strong>la lista esta en vacio</strong></li>
+          }
+        </ul>
+        <hr>
+          <h2>New switch</h2>
+          <div>
+            @switch (persona().name) {
+              @case ('nicolas') {
+                <p>soy nicolas...</p>
+              }
+              @case ('julian') {
+                <p>soy julian</p>
+              }
+              @default {
+                <p>no conozco a este tipo de persona</p>
+              }
+            }
+          </div>
+          <div>
+            @switch (persona().name) {
+              @case ('nicolas') {
+                <p>soy nicolas</p>
+              }
+              @case ('julian') {
+                <p>soy julian</p>
+              }
+              @default {
+                <p>no soy Persona</p>
+              }
+            }
+          </div>
+        </div>
